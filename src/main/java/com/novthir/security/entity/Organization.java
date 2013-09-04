@@ -1,6 +1,6 @@
 /**
  * <pre>
- * Copyright:		Copyright(C) 2011-2012, novthir.com
+ * Copyright:		Copyright(C) 2011-2013, novthir.com
  * Filename:		com.novthir.security.entity.Organization.java
  * Class:			Organization
  * Date:			2013-8-27

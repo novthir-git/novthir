@@ -1,6 +1,6 @@
 /**
  * <pre>
- * Copyright:		Copyright(C) 2011-2012, novthir.com
+ * Copyright:		Copyright(C) 2011-2013, novthir.com
  * Filename:		com.novthir.security.log.LogMessageObject.java
  * Class:			LogMessageObject
  * Date:			2013-5-27
