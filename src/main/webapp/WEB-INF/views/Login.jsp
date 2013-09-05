@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -135,63 +138,60 @@ jQuery(document).ready(function(){
 		<div class="right">
 			<span>Got no account?</span> <a href="javascript:void(0);">Register</a>
 		</div>
-
 	</div>
 	<!-- End of .container --> </header>
 	<!-- End of header -->
-
 	<!-- The container of the sidebar and content box -->
 	<section id="login" class="container_12 clearfix">
-
-	<form action="dashboard.html" method="post" class="box validate">
-
+	<form action="login" method="post" class="box validate">
 		<div class="header">
 			<h2>
-				<span class="icon icon-lock"></span>Login
+				<span class="icon icon-lock"></span>
+				<fmt:message key="label.login" />
 			</h2>
 		</div>
-
 		<div class="content">
 
 			<!-- Login messages -->
 			<div class="login-messages">
-				<div class="message welcome">Welcome back!</div>
-				<div class="message failure">Invalid credentials.</div>
+				<div class="message welcome">${msg }</div>
+				<div class="message failure"></div>
 			</div>
 
 			<!-- The form -->
 			<div class="form-box">
 
 				<div class="row">
-					<label for="login_name"> <strong>Username</strong></label>
+					<label for="login_name"><strong>
+					<fmt:message key="label.password" />
+					</strong></label>
 					<div>
 						<input tabindex=1 type="text" class="required noerror"
-							name="login_name" id="login_name" />
+							name="username" id="login_name" />
 					</div>
 				</div>
 
 				<div class="row">
-					<label for="login_pw"> <strong>Password</strong></small>
+					<label for="login_pw"> <strong>
+					<fmt:message key="label.password" />
+					</strong></small>
 					</label>
 					<div>
-						<input tabindex=2 type="password" class="required noerror" name=login_pw id=login_pw />
+						<input tabindex=2 type="password" class="required noerror" name="password" id=login_pw />
 					</div>
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<label for="login_pw"> <strong>Captcha</strong></small>
 					</label>
 					<div>
-						<input tabindex=3 type="text" class="required noerror" style="width: 200px;" name="captcha" />
+						<input tabindex=3 type="text" class="required noerror" style="width: 200px;" name="captcha_key" />
 						<span><img src="Captcha.jpg" width="75" height="24" id="captcha"/></span>
 					</div>
-				</div>
-				
+				</div> -->
 			</div>
 			<!-- End of .form-box -->
-
 		</div>
 		<!-- End of .content -->
-
 		<div class="actions">
 			<div class="left">
 				<div class="rememberme">
@@ -202,12 +202,10 @@ jQuery(document).ready(function(){
 			</div>
 		</div>
 		<!-- End of .actions -->
-
 	</form>
 	<!-- End of form --> </section>
 	<!-- Spawn $$.loaded -->
 	<script>$$.loaded();</script>
-
 	<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
 	   chromium.org/developers/how-tos/chrome-frame-getting-started -->
 	<!--[if lt IE 7 ]>
