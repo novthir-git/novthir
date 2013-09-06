@@ -79,7 +79,6 @@
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
 	<!-- production环境 -->
-	<beans profile="production">
 		<context:property-placeholder ignore-unresolvable="true" location="classpath*:/jdbc.properties" />
 
 		<!-- 数据源配置, 使用DBCP数据库连接池 -->
@@ -103,6 +102,5 @@
 		<!-- 数据源配置,使用应用服务器的数据库连接池 -->
 		<!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ExampleDB" /> -->
 			
-	</beans>
 </beans>
 

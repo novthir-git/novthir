@@ -337,7 +337,7 @@ if (!Array.prototype.reduce) {
 				// Defer execution
 				_.defer(function(){
 					images.forEach(function(img){
-						(new Image()).src = img;
+						(new Image()).src = "../styles/admin/"+img;
 					});
 				});
 			}

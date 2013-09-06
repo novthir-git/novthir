@@ -12,7 +12,7 @@
 	</bean>
 
 	<!-- 項目自定义的Realm -->
-	<bean id="shiroDbRealm" class="com.novthir.security.shiro.ShiroDbRealm" depends-on="userDAO, userRoleDAO, moduleDAO, organizationRoleDAO, captchaService">
+	<bean id="shiroDbRealm" class="com.novthir.security.shiro.ShiroDbRealm" depends-on="userDAO, userRoleDAO, moduleDAO, organizationRoleDAO,captchaService">
 		<property name="userService" ref="userServiceImpl"/>
 		<property name="userRoleService" ref="userRoleServiceImpl"/>
 		<property name="moduleService" ref="moduleServiceImpl"/>

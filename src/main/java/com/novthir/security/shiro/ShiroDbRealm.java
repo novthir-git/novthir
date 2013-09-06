@@ -121,9 +121,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 			if (user.getStatus().equals("disabled")) {
 				throw new DisabledAccountException();
 			}
-			
 			byte[] salt = Encodes.decodeHex(user.getSalt());
-			
 			ShiroUser shiroUser = new ShiroUser(user.getId(), user.getUsername(), user);
 			// 这里可以缓存认证
 			return new SimpleAuthenticationInfo(shiroUser, user.getPassword(),
