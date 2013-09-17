@@ -1453,7 +1453,7 @@
 										<div
 												style="position: absolute; left: 0px; top: 0px; width: 38px; height: 18px; z-index: 99;">
 												<embed id="ZeroClipboard_TableToolsMovie_1"
-													src="${contextPath }/extras/datatables/copy_csv_xls_pdf.swf" loop="false"
+													src="${contextPath }/styles/admin/extras/datatables/copy_csv_xls_pdf.swf" loop="false"
 													menu="false" quality="best" bgcolor="#ffffff" width="38"
 													height="18" name="ZeroClipboard_TableToolsMovie_1"
 													align="middle" allowscriptaccess="always"
@@ -1467,7 +1467,7 @@
 										<div
 												style="position: absolute; left: 0px; top: 0px; width: 32px; height: 18px; z-index: 99;">
 												<embed id="ZeroClipboard_TableToolsMovie_2"
-													src="${contextPath }/extras/datatables/copy_csv_xls_pdf.swf" loop="false"
+													src="${contextPath }/styles/admin/extras/datatables/copy_csv_xls_pdf.swf" loop="false"
 													menu="false" quality="best" bgcolor="#ffffff" width="32"
 													height="18" name="ZeroClipboard_TableToolsMovie_2"
 													align="middle" allowscriptaccess="always"
@@ -1481,7 +1481,7 @@
 										<div
 												style="position: absolute; left: 0px; top: 0px; width: 44px; height: 18px; z-index: 99;">
 												<embed id="ZeroClipboard_TableToolsMovie_3"
-													src="${contextPath }/extras/datatables/copy_csv_xls_pdf.swf" loop="false"
+													src="${contextPath }/styles/admin/extras/datatables/copy_csv_xls_pdf.swf" loop="false"
 													menu="false" quality="best" bgcolor="#ffffff" width="44"
 													height="18" name="ZeroClipboard_TableToolsMovie_3"
 													align="middle" allowscriptaccess="always"
@@ -1495,7 +1495,7 @@
 										<div
 												style="position: absolute; left: 0px; top: 0px; width: 32px; height: 18px; z-index: 99;">
 												<embed id="ZeroClipboard_TableToolsMovie_4"
-													src="${contextPath }/extras/datatables/copy_csv_xls_pdf.swf" loop="false"
+													src="${contextPath }/styles/admin/extras/datatables/copy_csv_xls_pdf.swf" loop="false"
 													menu="false" quality="best" bgcolor="#ffffff" width="32"
 													height="18" name="ZeroClipboard_TableToolsMovie_4"
 													align="middle" allowscriptaccess="always"

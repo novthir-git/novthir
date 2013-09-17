@@ -52,25 +52,19 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script>
-	window.jQuery
-			|| document
-					.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')
+	window.jQuery|| document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')
 </script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
 <script>
-	window.jQuery.ui
-			|| document
-					.write('<script src="js/libs/jquery-ui-1.8.21.min.js"><\/script>')
+	window.jQuery.ui || document.write('<script src="js/libs/jquery-ui-1.8.21.min.js"><\/script>')
 </script>
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/0.4.2/lodash.min.js"></script>
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=PT+Sans:400,700">
 <script>
-	window._
-			|| document
-					.write('<script src="js/libs/lo-dash.min.js"><\/script>')
+	window._|| document.write('<script src="js/libs/lo-dash.min.js"><\/script>')
 </script>
 <script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>

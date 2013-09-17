@@ -56,7 +56,7 @@ public class IndexController {
 	@Autowired
 	private ModuleService moduleService;
 	
-	private static final String INDEX = "management/index/dashboard";
+	private static final String INDEX = "management/index/index";
 	private static final String UPDATE_PASSWORD = "management/index/updatePwd";
 	private static final String UPDATE_BASE = "management/index/updateBase";
 	
@@ -76,12 +76,11 @@ public class IndexController {
 		request.setAttribute("menuModule", menuModule);
 
 		LogUitl.putArgs(LogMessageObject.newWrite().setObjects(new Object[]{shiroUser.getLoginName()}));
-		return INDEX;
+		return "management/index/index";
 	}
 	
 	private Module getMenuModule(Subject subject) {
 		Module rootModule = moduleService.getTree();
-
 		check(rootModule, subject);
 		return rootModule;
 	}
