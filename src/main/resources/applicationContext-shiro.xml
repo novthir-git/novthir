@@ -41,7 +41,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/Captcha.jpg = anon
-				/styles/** = anon
+				/assets/** = anon
 				/login/timeout = anon
 				/login = authc
 				/logout = logout

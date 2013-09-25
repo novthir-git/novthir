@@ -1,166 +1,464 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
+<%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> 
+<html lang="en"> 
 <!--<![endif]-->
-
+<!-- BEGIN HEAD -->
 <head>
-	<meta charset="utf-8">
-	<!-- Use the .htaccess and remove these lines to avoid edge case issues.
-	   More info: h5bp.com/b/378 -->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Login - Mango: Slick and Responsive Admin Template</title>
-	<meta name="description" content="Mango is a slick and responsive Admin Template build with modern techniques like HTML5 and CSS3 to be used for backend solutions of any size.">
-	<meta name="author" content="Simon Stamm &amp; Markus Siemens">
-	<!-- Mobile viewport optimized: h5bp.com/viewport -->
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<!-- iPhone: Don't render numbers as call links -->
-	<meta name="format-detection" content="telephone=no">
+	<meta charset="utf-8" />
+	<title>Login</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<!-- begin global mandatory styles -->
 	<%@ include file="/WEB-INF/views/include.inc.jsp"%>
+	<!-- end global mandatory styles -->
 	
-	<!-- end scripts -->
+	<!-- begin page level styles -->
+	<link href="${ctx }/assets/css/pages/login-soft.css" rel="stylesheet" type="text/css"/>
+	<!-- end page level styles -->
+	<link rel="shortcut icon" href="favicon.ico" />
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script src="${ctx }/assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="${ctx }/assets/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="${ctx }/assets/plugins/select2/select2.min.js"></script>
+	<!-- END PAGE LEVEL PLUGINS -->
 	
-<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style><style>#haloword-pron { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -34px; }#haloword-pron:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -34px; }#haloword-open { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -17px; }#haloword-open:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -17px; }#haloword-close { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px 0; }#haloword-close:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px 0; }#haloword-add { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -51px; }#haloword-add:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -51px; }#haloword-remove { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -68px; }#haloword-remove:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -68px; }</style></head>
-<body class=login>
-
-	<!-- Some dialogs etc. -->
-	<!-- The loading box -->
-	<div id="loading-overlay"></div>
-	<div id="loading">
-		<span>Loading...</span>
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="assets/scripts/app.js" type="text/javascript"></script>
+	<script src="assets/scripts/login-soft.js" type="text/javascript"></script>      
+	<!-- END PAGE LEVEL SCRIPTS --> 
+	<script>
+		jQuery(document).ready(function() {     
+		  App.init();
+		  Login.init();
+		});
+	</script>
+	<!-- END JAVASCRIPTS -->
+	<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
+	
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+	<!-- BEGIN LOGO -->
+	<div class="logo">
+		<img src="${ctx }/assets/img/logo-big.png" alt="" /> 
 	</div>
-	<!-- End of loading box -->
-	<!--------------------------------->
-	<!-- Now, the page itself begins -->
-	<!--------------------------------->
-	<!-- The toolbar at the top -->
-	<section id="toolbar">
-	<div class="container_12">
-		<!-- Left side -->
-		<div class="left">
-			<ul class="breadcrumb">
-			</ul>
-		</div>
-		<!-- End of .left -->
-
-		<!-- Right side -->
-		<div class="right">
-			<ul>
-			</ul>
-		</div>
-		<!-- End of .right -->
-
-		<!-- Phone only items -->
-		<div class="phone">
-
-			<!-- User Link -->
-			<li><a href="#"><span class="icon icon-home"></span></a></li>
-			<!-- Navigation -->
-			<li><a href="#"><span class="icon icon-heart"></span></a></li>
-
-		</div>
-		<!-- End of .phone -->
-
-	</div>
-	<!-- End of .container_12 --> </section>
-	<!-- End of #toolbar -->
-
-	<!-- The header containing the logo -->
-	<header class="container_12">
-
-	<div class="container">
-
-		<!-- Your logos -->
-		<a href="/tf-mango/"><img src="styles/admin/img/logo-light.png" alt="Mango"
-			width="210" height="67"></a> <a class="phone-title"
-			href="login.html"><img
-			src="styles/admin/img/logo-mobile.png"
-			alt="Mango" height="22" width="70" /></a>
-
-		<!-- Right link -->
-		<div class="right">
-			<span>Got no account?</span> <a href="javascript:void(0);">Register</a>
-		</div>
-	</div>
-	<!-- End of .container --> </header>
-	<!-- End of header -->
-	<!-- The container of the sidebar and content box -->
-	<section id="login" class="container_12 clearfix">
-	<form action="login" method="post" class="box validate">
-		<div class="header">
-			<h2>
-				<span class="icon icon-lock"></span>
-				<fmt:message key="label.login" />
-			</h2>
-		</div>
-		<div class="content">
-
-			<!-- Login messages -->
-			<div class="login-messages">
-				<div class="message welcome">${msg }</div>
-				<div class="message failure"></div>
+	<!-- END LOGO -->
+	<!-- BEGIN LOGIN -->
+	<div class="content">
+		<!-- BEGIN LOGIN FORM -->
+		<form class="form-vertical login-form" action="${ctx }/login" method="post">
+			<h3 class="form-title">Login to your account</h3>
+			<div class="alert alert-error hide">
+				<button class="close" data-dismiss="alert"></button>
+				<span>Enter any username and password.</span>
 			</div>
-
-			<!-- The form -->
-			<div class="form-box">
-
-				<div class="row">
-					<label for="login_name"><strong>
-					<fmt:message key="label.password" />
-					</strong></label>
-					<div>
-						<input tabindex=1 type="text" class="required noerror"
-							name="username" id="login_name" />
+			<div class="control-group">
+				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+				<label class="control-label visible-ie8 visible-ie9">Username</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-user"></i>
+						<input class="m-wrap placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
 					</div>
 				</div>
-
-				<div class="row">
-					<label for="login_pw"> <strong>
-					<fmt:message key="label.password" />
-					</strong></small>
-					</label>
-					<div>
-						<input tabindex=2 type="password" class="required noerror" name="password" id=login_pw />
+			</div>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">Password</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-lock"></i>
+						<input class="m-wrap placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
 					</div>
 				</div>
-				<!-- <div class="row">
-					<label for="login_pw"> <strong>Captcha</strong></small>
-					</label>
-					<div>
-						<input tabindex=3 type="text" class="required noerror" style="width: 200px;" name="captcha_key" />
-						<span><img src="Captcha.jpg" width="75" height="24" id="captcha"/></span>
-					</div>
-				</div> -->
 			</div>
-			<!-- End of .form-box -->
-		</div>
-		<!-- End of .content -->
-		<div class="actions">
-			<div class="left">
-				<div class="rememberme">
+			<div class="form-actions">
+				<label class="checkbox">
+				<input type="checkbox" name="remember" value="1"/> Remember me
+				</label>
+				<button type="submit" class="btn blue pull-right">
+				Login <i class="m-icon-swapright m-icon-white"></i>
+				</button>            
+			</div>
+			<div class="forget-password">
+				<h4>Forgot your password ?</h4>
+				<p>
+					no worries, click <a href="javascript:;"  id="forget-password">here</a>
+					to reset your password.
+				</p>
+			</div>
+			<div class="create-account">
+				<p>
+					Don't have an account yet ?&nbsp; 
+					<a href="javascript:;" id="register-btn" >Create an account</a>
+				</p>
+			</div>
+		</form>
+		<!-- END LOGIN FORM -->        
+		<!-- BEGIN FORGOT PASSWORD FORM -->
+		<form class="form-vertical forget-form" action="index.html" method="post">
+			<h3 >Forget Password ?</h3>
+			<p>Enter your e-mail address below to reset your password.</p>
+			<div class="control-group">
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-envelope"></i>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" autocomplete="off" name="email" />
+					</div>
 				</div>
 			</div>
-			<div class="right">
-				<input tabindex=3 type="submit" value="Sign In" name="login_btn" />
+			<div class="form-actions">
+				<button type="button" id="back-btn" class="btn">
+				<i class="m-icon-swapleft"></i> Back
+				</button>
+				<button type="submit" class="btn blue pull-right">
+				Submit <i class="m-icon-swapright m-icon-white"></i>
+				</button>            
 			</div>
-		</div>
-		<!-- End of .actions -->
-	</form>
-	<!-- End of form --> </section>
-	<!-- Spawn $$.loaded -->
-	<script>$$.loaded();</script>
-	<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
-	   chromium.org/developers/how-tos/chrome-frame-getting-started -->
-	<!--[if lt IE 7 ]>
-	<script defer src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-	<script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-	<![endif]-->
-
-</body>
+		</form>
+		<!-- END FORGOT PASSWORD FORM -->
+		<!-- BEGIN REGISTRATION FORM -->
+		<form class="form-vertical register-form" action="index.html" method="post">
+			<h3 >Sign Up</h3>
+			<p>Enter your personal details below:</p>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">Full Name</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-font"></i>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Full Name" name="fullname"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+				<label class="control-label visible-ie8 visible-ie9">Email</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-envelope"></i>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">Address</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-ok"></i>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Address" name="address"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">City/Town</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-location-arrow"></i>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="City/Town" name="city"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="row-fluid">
+					<label class="control-label visible-ie8 visible-ie9">Country</label>
+					<div class="controls">
+						<select name="country" id="select2_sample4" class="span12 select2">
+							<option value=""></option>
+							<option value="AF">Afghanistan</option>
+							<option value="AL">Albania</option>
+							<option value="DZ">Algeria</option>
+							<option value="AS">American Samoa</option>
+							<option value="AD">Andorra</option>
+							<option value="AO">Angola</option>
+							<option value="AI">Anguilla</option>
+							<option value="AQ">Antarctica</option>
+							<option value="AR">Argentina</option>
+							<option value="AM">Armenia</option>
+							<option value="AW">Aruba</option>
+							<option value="AU">Australia</option>
+							<option value="AT">Austria</option>
+							<option value="AZ">Azerbaijan</option>
+							<option value="BS">Bahamas</option>
+							<option value="BH">Bahrain</option>
+							<option value="BD">Bangladesh</option>
+							<option value="BB">Barbados</option>
+							<option value="BY">Belarus</option>
+							<option value="BE">Belgium</option>
+							<option value="BZ">Belize</option>
+							<option value="BJ">Benin</option>
+							<option value="BM">Bermuda</option>
+							<option value="BT">Bhutan</option>
+							<option value="BO">Bolivia</option>
+							<option value="BA">Bosnia and Herzegowina</option>
+							<option value="BW">Botswana</option>
+							<option value="BV">Bouvet Island</option>
+							<option value="BR">Brazil</option>
+							<option value="IO">British Indian Ocean Territory</option>
+							<option value="BN">Brunei Darussalam</option>
+							<option value="BG">Bulgaria</option>
+							<option value="BF">Burkina Faso</option>
+							<option value="BI">Burundi</option>
+							<option value="KH">Cambodia</option>
+							<option value="CM">Cameroon</option>
+							<option value="CA">Canada</option>
+							<option value="CV">Cape Verde</option>
+							<option value="KY">Cayman Islands</option>
+							<option value="CF">Central African Republic</option>
+							<option value="TD">Chad</option>
+							<option value="CL">Chile</option>
+							<option value="CN">China</option>
+							<option value="CX">Christmas Island</option>
+							<option value="CC">Cocos (Keeling) Islands</option>
+							<option value="CO">Colombia</option>
+							<option value="KM">Comoros</option>
+							<option value="CG">Congo</option>
+							<option value="CD">Congo, the Democratic Republic of the</option>
+							<option value="CK">Cook Islands</option>
+							<option value="CR">Costa Rica</option>
+							<option value="CI">Cote d'Ivoire</option>
+							<option value="HR">Croatia (Hrvatska)</option>
+							<option value="CU">Cuba</option>
+							<option value="CY">Cyprus</option>
+							<option value="CZ">Czech Republic</option>
+							<option value="DK">Denmark</option>
+							<option value="DJ">Djibouti</option>
+							<option value="DM">Dominica</option>
+							<option value="DO">Dominican Republic</option>
+							<option value="EC">Ecuador</option>
+							<option value="EG">Egypt</option>
+							<option value="SV">El Salvador</option>
+							<option value="GQ">Equatorial Guinea</option>
+							<option value="ER">Eritrea</option>
+							<option value="EE">Estonia</option>
+							<option value="ET">Ethiopia</option>
+							<option value="FK">Falkland Islands (Malvinas)</option>
+							<option value="FO">Faroe Islands</option>
+							<option value="FJ">Fiji</option>
+							<option value="FI">Finland</option>
+							<option value="FR">France</option>
+							<option value="GF">French Guiana</option>
+							<option value="PF">French Polynesia</option>
+							<option value="TF">French Southern Territories</option>
+							<option value="GA">Gabon</option>
+							<option value="GM">Gambia</option>
+							<option value="GE">Georgia</option>
+							<option value="DE">Germany</option>
+							<option value="GH">Ghana</option>
+							<option value="GI">Gibraltar</option>
+							<option value="GR">Greece</option>
+							<option value="GL">Greenland</option>
+							<option value="GD">Grenada</option>
+							<option value="GP">Guadeloupe</option>
+							<option value="GU">Guam</option>
+							<option value="GT">Guatemala</option>
+							<option value="GN">Guinea</option>
+							<option value="GW">Guinea-Bissau</option>
+							<option value="GY">Guyana</option>
+							<option value="HT">Haiti</option>
+							<option value="HM">Heard and Mc Donald Islands</option>
+							<option value="VA">Holy See (Vatican City State)</option>
+							<option value="HN">Honduras</option>
+							<option value="HK">Hong Kong</option>
+							<option value="HU">Hungary</option>
+							<option value="IS">Iceland</option>
+							<option value="IN">India</option>
+							<option value="ID">Indonesia</option>
+							<option value="IR">Iran (Islamic Republic of)</option>
+							<option value="IQ">Iraq</option>
+							<option value="IE">Ireland</option>
+							<option value="IL">Israel</option>
+							<option value="IT">Italy</option>
+							<option value="JM">Jamaica</option>
+							<option value="JP">Japan</option>
+							<option value="JO">Jordan</option>
+							<option value="KZ">Kazakhstan</option>
+							<option value="KE">Kenya</option>
+							<option value="KI">Kiribati</option>
+							<option value="KP">Korea, Democratic People's Republic of</option>
+							<option value="KR">Korea, Republic of</option>
+							<option value="KW">Kuwait</option>
+							<option value="KG">Kyrgyzstan</option>
+							<option value="LA">Lao People's Democratic Republic</option>
+							<option value="LV">Latvia</option>
+							<option value="LB">Lebanon</option>
+							<option value="LS">Lesotho</option>
+							<option value="LR">Liberia</option>
+							<option value="LY">Libyan Arab Jamahiriya</option>
+							<option value="LI">Liechtenstein</option>
+							<option value="LT">Lithuania</option>
+							<option value="LU">Luxembourg</option>
+							<option value="MO">Macau</option>
+							<option value="MK">Macedonia, The Former Yugoslav Republic of</option>
+							<option value="MG">Madagascar</option>
+							<option value="MW">Malawi</option>
+							<option value="MY">Malaysia</option>
+							<option value="MV">Maldives</option>
+							<option value="ML">Mali</option>
+							<option value="MT">Malta</option>
+							<option value="MH">Marshall Islands</option>
+							<option value="MQ">Martinique</option>
+							<option value="MR">Mauritania</option>
+							<option value="MU">Mauritius</option>
+							<option value="YT">Mayotte</option>
+							<option value="MX">Mexico</option>
+							<option value="FM">Micronesia, Federated States of</option>
+							<option value="MD">Moldova, Republic of</option>
+							<option value="MC">Monaco</option>
+							<option value="MN">Mongolia</option>
+							<option value="MS">Montserrat</option>
+							<option value="MA">Morocco</option>
+							<option value="MZ">Mozambique</option>
+							<option value="MM">Myanmar</option>
+							<option value="NA">Namibia</option>
+							<option value="NR">Nauru</option>
+							<option value="NP">Nepal</option>
+							<option value="NL">Netherlands</option>
+							<option value="AN">Netherlands Antilles</option>
+							<option value="NC">New Caledonia</option>
+							<option value="NZ">New Zealand</option>
+							<option value="NI">Nicaragua</option>
+							<option value="NE">Niger</option>
+							<option value="NG">Nigeria</option>
+							<option value="NU">Niue</option>
+							<option value="NF">Norfolk Island</option>
+							<option value="MP">Northern Mariana Islands</option>
+							<option value="NO">Norway</option>
+							<option value="OM">Oman</option>
+							<option value="PK">Pakistan</option>
+							<option value="PW">Palau</option>
+							<option value="PA">Panama</option>
+							<option value="PG">Papua New Guinea</option>
+							<option value="PY">Paraguay</option>
+							<option value="PE">Peru</option>
+							<option value="PH">Philippines</option>
+							<option value="PN">Pitcairn</option>
+							<option value="PL">Poland</option>
+							<option value="PT">Portugal</option>
+							<option value="PR">Puerto Rico</option>
+							<option value="QA">Qatar</option>
+							<option value="RE">Reunion</option>
+							<option value="RO">Romania</option>
+							<option value="RU">Russian Federation</option>
+							<option value="RW">Rwanda</option>
+							<option value="KN">Saint Kitts and Nevis</option>
+							<option value="LC">Saint LUCIA</option>
+							<option value="VC">Saint Vincent and the Grenadines</option>
+							<option value="WS">Samoa</option>
+							<option value="SM">San Marino</option>
+							<option value="ST">Sao Tome and Principe</option>
+							<option value="SA">Saudi Arabia</option>
+							<option value="SN">Senegal</option>
+							<option value="SC">Seychelles</option>
+							<option value="SL">Sierra Leone</option>
+							<option value="SG">Singapore</option>
+							<option value="SK">Slovakia (Slovak Republic)</option>
+							<option value="SI">Slovenia</option>
+							<option value="SB">Solomon Islands</option>
+							<option value="SO">Somalia</option>
+							<option value="ZA">South Africa</option>
+							<option value="GS">South Georgia and the South Sandwich Islands</option>
+							<option value="ES">Spain</option>
+							<option value="LK">Sri Lanka</option>
+							<option value="SH">St. Helena</option>
+							<option value="PM">St. Pierre and Miquelon</option>
+							<option value="SD">Sudan</option>
+							<option value="SR">Suriname</option>
+							<option value="SJ">Svalbard and Jan Mayen Islands</option>
+							<option value="SZ">Swaziland</option>
+							<option value="SE">Sweden</option>
+							<option value="CH">Switzerland</option>
+							<option value="SY">Syrian Arab Republic</option>
+							<option value="TW">Taiwan, Province of China</option>
+							<option value="TJ">Tajikistan</option>
+							<option value="TZ">Tanzania, United Republic of</option>
+							<option value="TH">Thailand</option>
+							<option value="TG">Togo</option>
+							<option value="TK">Tokelau</option>
+							<option value="TO">Tonga</option>
+							<option value="TT">Trinidad and Tobago</option>
+							<option value="TN">Tunisia</option>
+							<option value="TR">Turkey</option>
+							<option value="TM">Turkmenistan</option>
+							<option value="TC">Turks and Caicos Islands</option>
+							<option value="TV">Tuvalu</option>
+							<option value="UG">Uganda</option>
+							<option value="UA">Ukraine</option>
+							<option value="AE">United Arab Emirates</option>
+							<option value="GB">United Kingdom</option>
+							<option value="US">United States</option>
+							<option value="UM">United States Minor Outlying Islands</option>
+							<option value="UY">Uruguay</option>
+							<option value="UZ">Uzbekistan</option>
+							<option value="VU">Vanuatu</option>
+							<option value="VE">Venezuela</option>
+							<option value="VN">Viet Nam</option>
+							<option value="VG">Virgin Islands (British)</option>
+							<option value="VI">Virgin Islands (U.S.)</option>
+							<option value="WF">Wallis and Futuna Islands</option>
+							<option value="EH">Western Sahara</option>
+							<option value="YE">Yemen</option>
+							<option value="ZM">Zambia</option>
+							<option value="ZW">Zimbabwe</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<p>Enter your account details below:</p>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">Username</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-user"></i>
+						<input class="m-wrap placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">Password</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-lock"></i>
+						<input class="m-wrap placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" name="password"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-ok"></i>
+						<input class="m-wrap placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<label class="checkbox">
+					<input type="checkbox" name="tnc"/> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+					</label>  
+					<div id="register_tnc_error"></div>
+				</div>
+			</div>
+			<div class="form-actions">
+				<button id="register-back-btn" type="button" class="btn">
+				<i class="m-icon-swapleft"></i>  Back
+				</button>
+				<button type="submit" id="register-submit-btn" class="btn green pull-right">
+				Sign Up <i class="m-icon-swapright m-icon-white"></i>
+				</button>            
+			</div>
+		</form>
+		<!-- END REGISTRATION FORM -->
+	</div>
+	<!-- END LOGIN -->
+	<!-- BEGIN COPYRIGHT -->
+	<div class="copyright">
+		2013 &copy; Metronic - Admin Dashboard Template.
+	</div>
+	<!-- END COPYRIGHT -->
+	<!-- END BODY -->
 </html>
