@@ -99,7 +99,7 @@
 			</a>
 			<ul class="sub-menu">
 				<li >
-					<a href="${ctx }/management/security/user/list">
+					<a href="${ctx }/management/security/user/manager">
 					用户管理</a>
 				</li>
 				<li >

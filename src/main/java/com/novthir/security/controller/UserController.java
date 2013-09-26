@@ -57,7 +57,7 @@ public class UserController {
 
 	private static final String CREATE = "management/security/user/create";
 	private static final String UPDATE = "management/security/user/update";
-	private static final String LIST = "management/security/user/list";
+	private static final String LIST = "management/security/user/manager";
 	private static final String LOOK_UP_ROLE = "management/security/user/assign_user_role";
 	private static final String LOOK_USER_ROLE = "management/security/user/delete_user_role";
 	private static final String LOOK_ORG = "management/security/user/lookup_org";
@@ -161,11 +161,16 @@ public class UserController {
 				new Object[] { Arrays.toString(usernames) }));
 		return AjaxObject.newOk("删除用户成功！").setCallbackType("").toString();
 	}
-
-	@RequiresPermissions("User:view")
-	@RequestMapping(value = "/list", method = { RequestMethod.GET,
-			RequestMethod.POST })
-	public String list(Page page, String keywords, Map<String, Object> map) {
+@RequestMapping(value = "/test", method = RequestMethod.POST)
+public @ResponseBody User test(){
+	User u = new User();
+	System.out.println("sdfsdfsfs");
+	u.setRealname("sdffd");
+	return u;
+}
+	////@RequiresPermissions("User:view")
+	@RequestMapping(value = "/list", method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody  Map<String,Object> list(Page page, String keywords, Map<String, Object> map) {
 		List<User> users = null;
 		if (StringUtils.isNotBlank(keywords)) {
 			users = userService.find(page, keywords);
@@ -175,9 +180,15 @@ public class UserController {
 		map.put("page", page);
 		map.put("users", users);
 		map.put("keywords", keywords);
-		return LIST;
+		return map;
 	}
 
+
+	///@RequiresPermissions("User:view")
+	@RequestMapping(value = "/manager", method = { RequestMethod.GET })
+	public String manager() {
+		return LIST;
+	}
 	@Log(message = "{0}用户{1}")
 	@RequiresPermissions("User:reset")
 	@RequestMapping(value = "/reset/{type}/{userId}", method = RequestMethod.POST)
