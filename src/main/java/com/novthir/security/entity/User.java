@@ -28,6 +28,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
@@ -96,10 +97,12 @@ public class User extends IdEntity {
 	
 	@OneToMany(mappedBy="user", cascade={CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval=true)
 	@OrderBy("priority ASC")
+	@JsonIgnore
 	private List<UserRole> userRoles = Lists.newArrayList();
 	
 	@ManyToOne
 	@JoinColumn(name="orgId")
+	@JsonIgnore
 	private Organization organization;
 	
 	/**  

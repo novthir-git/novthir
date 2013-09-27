@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.novthir.security.entity.User;
 
@@ -25,4 +26,11 @@ public interface UserDAO extends JpaRepository<User, Long> {
 	 * @return
 	 */
 	List<User> findByOrganizationId(Long organizationId);
+	
+	@Query(  
+				value="SELECT id,createTime,email,phone,realname,status,username FROM User",
+				countQuery="SELECT count(u.id) FROM User u"
+			)
+    Page<Object[]>	queryAll(Pageable page);
+	
 }

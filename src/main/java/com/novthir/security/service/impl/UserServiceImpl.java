@@ -13,6 +13,7 @@
  
 package com.novthir.security.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Lists;
 import com.novthir.security.dao.UserDAO;
 import com.novthir.security.entity.User;
 import com.novthir.security.exception.ExistedException;
@@ -65,9 +67,18 @@ public class UserServiceImpl implements UserService {
 
 	
 	public List<User> findAll(Page page) {
-		org.springframework.data.domain.Page<User> springDataPage = userDAO.findAll(PageUtils.createPageable(page));
-		page.setTotalCount(springDataPage.getTotalElements());
-		return springDataPage.getContent();
+		List<User> users = Lists.newArrayList();
+		org.springframework.data.domain.Page<Object[]> dataPage = userDAO.queryAll(PageUtils.createPageable(page));
+		page.setTotalCount(dataPage.getTotalElements());
+		if(dataPage.getContent().size() > 0){
+			for (Object[] o : dataPage.getContent()) {
+				User user = new User();
+				user.setId(Long.parseLong(o[0].toString()));
+				user.setCreateTime((Date) o[1]);
+				users.add(user);
+			}
+		}
+		return users;
 	}
 	
 	/**

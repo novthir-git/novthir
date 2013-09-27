@@ -161,16 +161,16 @@ public class UserController {
 				new Object[] { Arrays.toString(usernames) }));
 		return AjaxObject.newOk("删除用户成功！").setCallbackType("").toString();
 	}
-@RequestMapping(value = "/test", method = RequestMethod.POST)
+@RequestMapping(value = "/test")
 public @ResponseBody User test(){
 	User u = new User();
-	System.out.println("sdfsdfsfs");
 	u.setRealname("sdffd");
+	u.setEmail("novthir@gmail.com");
 	return u;
 }
-	////@RequiresPermissions("User:view")
+	@RequiresPermissions("User:view")
 	@RequestMapping(value = "/list", method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody  Map<String,Object> list(Page page, String keywords, Map<String, Object> map) {
+	public @ResponseBody  List<User> list(Page page, String keywords, Map<String, Object> map) {
 		List<User> users = null;
 		if (StringUtils.isNotBlank(keywords)) {
 			users = userService.find(page, keywords);
@@ -180,11 +180,11 @@ public @ResponseBody User test(){
 		map.put("page", page);
 		map.put("users", users);
 		map.put("keywords", keywords);
-		return map;
+		return users;
 	}
 
 
-	///@RequiresPermissions("User:view")
+	@RequiresPermissions("User:view")
 	@RequestMapping(value = "/manager", method = { RequestMethod.GET })
 	public String manager() {
 		return LIST;

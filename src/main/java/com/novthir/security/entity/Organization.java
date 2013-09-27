@@ -24,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Length;
@@ -57,6 +58,7 @@ public class Organization extends IdEntity {
 
 	@ManyToOne
 	@JoinColumn(name="parentId")
+	@JsonIgnore
 	private Organization parent;
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy="parent")

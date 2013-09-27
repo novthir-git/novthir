@@ -1,5 +1,6 @@
 package com.novthir.security.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.After;
@@ -12,9 +13,11 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+
+import com.novthir.security.utils.Page;
 
 @ContextConfiguration({ "/applicationContext.xml",
 		"/applicationContext-shiro-test.xml", "/spring-mvc-test.xml" })
@@ -23,8 +26,12 @@ public class UserControllerTest extends
 		AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	public RequestMappingHandlerAdapter handlerAdapter;
+	
+	 @Autowired
+    private RequestMappingHandlerMapping handlerMapping;
 	@Autowired
 	private UserController userController;
+	
 	private static MockHttpServletRequest request;
 	
 	private static MockHttpServletResponse response;
@@ -49,16 +56,19 @@ public class UserControllerTest extends
 		request.setMethod(HttpMethod.POST.name());
 		ModelAndView mv = null;
 		try {
-			request.setRequestURI("/management/security/user/test");
+		/*	request.setRequestURI("/management/security/user/list");
 			mv = handlerAdapter.handle(request, response, new HandlerMethod(
-					userController, "test"));
+					userController, "list"));*/
+			Map m = userController.list(new Page(),null,new HashMap<String,Object>());
+			Assert.assertNotNull(m);
+			Assert.assertNotNull(m.get("users"));
 			System.out.println(response.getOutputStream());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		///Assert.assertNotNull(mv);
+		
 		///Assert.assertEquals(response.getStatus(), 200);
 	////	System.out.println(mv.getViewName());
 		//Map m = mv.getModel();
