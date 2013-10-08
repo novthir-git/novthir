@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springside.modules.beanvalidator.BeanValidators;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.novthir.security.entity.Organization;
 import com.novthir.security.entity.Role;
 import com.novthir.security.entity.User;
@@ -92,7 +93,6 @@ public class UserController {
 	public User getOne(@RequestParam(value = "id", required = false) Long id) {
 		if (id != null) {
 			User user = userService.get(id);
-			user.setOrganization(null);
 			return user;
 		}
 		return null;
@@ -161,34 +161,44 @@ public class UserController {
 				new Object[] { Arrays.toString(usernames) }));
 		return AjaxObject.newOk("删除用户成功！").setCallbackType("").toString();
 	}
-@RequestMapping(value = "/test")
-public @ResponseBody User test(){
-	User u = new User();
-	u.setRealname("sdffd");
-	u.setEmail("novthir@gmail.com");
-	return u;
-}
+
+	@RequestMapping(value = "/test")
+	public @ResponseBody
+	User test() {
+		User u = new User();
+		u.setRealname("sdffd");
+		u.setEmail("novthir@gmail.com");
+		return u;
+	}
+
 	@RequiresPermissions("User:view")
-	@RequestMapping(value = "/list", method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody  List<User> list(Page page, String keywords, Map<String, Object> map) {
+	@RequestMapping(value = "/list", method = { RequestMethod.GET,RequestMethod.POST })
+	public @ResponseBody	Map<String, Object> list(Page page, String keywords) {
+		Map<String,Object> map = Maps.newHashMap();
 		List<User> users = null;
 		if (StringUtils.isNotBlank(keywords)) {
 			users = userService.find(page, keywords);
 		} else {
 			users = userService.findAll(page);
 		}
+		if(users != null){
+			for(User user:users){
+				user.setPassword("");
+				user.setSalt("");
+			}
+		}
 		map.put("page", page);
-		map.put("users", users);
+		map.put("aaData", users);
 		map.put("keywords", keywords);
-		return users;
+		return map;
 	}
-
 
 	@RequiresPermissions("User:view")
 	@RequestMapping(value = "/manager", method = { RequestMethod.GET })
 	public String manager() {
 		return LIST;
 	}
+
 	@Log(message = "{0}用户{1}")
 	@RequiresPermissions("User:reset")
 	@RequestMapping(value = "/reset/{type}/{userId}", method = RequestMethod.POST)

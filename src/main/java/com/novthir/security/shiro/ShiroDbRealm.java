@@ -145,7 +145,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		
 		List<UserRole> userRoles = userRoleService.find(shiroUser.getId());
 		List<OrganizationRole> organizationRoles = organizationRoleService
-				.find(shiroUser.getUser().getOrganization().getId());
+				.find(shiroUser.getUser().getOrgId());
 		
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.addStringPermissions(makePermissions(userRoles, organizationRoles, shiroUser));

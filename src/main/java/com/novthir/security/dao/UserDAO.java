@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.novthir.security.entity.User;
 
-public interface UserDAO extends JpaRepository<User, Long> {
+public interface UserDAO extends PagingAndSortingRepository<User, Long> {
 	// 根据登录名查找用户
 	User findByUsername(String Username);
 	
@@ -25,12 +25,12 @@ public interface UserDAO extends JpaRepository<User, Long> {
 	 * @param organizationId
 	 * @return
 	 */
-	List<User> findByOrganizationId(Long organizationId);
+	List<User> findByOrgId(Long organizationId);
 	
 	@Query(  
-				value="SELECT id,createTime,email,phone,realname,status,username FROM User",
+				value="SELECT u.id,u.realname,u.email,u.createTime,u.salt,u.status,u.phone,u.username FROM User u ",
 				countQuery="SELECT count(u.id) FROM User u"
 			)
-    Page<Object[]>	queryAll(Pageable page);
+    Page<User>	queryAll(Pageable page);
 	
 }

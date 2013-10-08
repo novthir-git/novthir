@@ -13,6 +13,8 @@
  
 package com.novthir.security.utils;
 
+import java.io.Serializable;
+
 
 /** 
  * 	
@@ -21,7 +23,7 @@ package com.novthir.security.utils;
  * @since   2013-6-11 上午10:28:30 
  */
 
-public class Page {
+public class Page implements Serializable {
 	public final static String ORDER_DIRECTION_ASC = "ASC"; 
 	public final static String ORDER_DIRECTION_DESC = "DESC";
 	

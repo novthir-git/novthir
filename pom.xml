@@ -155,16 +155,16 @@
 			<version>2.4</version>
 			<scope>provided</scope>
 		</dependency>
-			<dependency>
+		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.7</version>
+			<artifactId>jackson-core-lgpl</artifactId>
+			<version>1.8.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.7</version>
+			<artifactId>jackson-mapper-lgpl</artifactId>
+			<version>1.8.1</version>
 		</dependency>
 		
 		<!-- javaEE end -->

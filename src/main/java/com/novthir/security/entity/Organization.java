@@ -64,9 +64,6 @@ public class Organization extends IdEntity {
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy="parent")
 	private List<Organization> children = Lists.newArrayList();
 	
-	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="organization")
-	private List<User> users = Lists.newArrayList();
-	
 	@OneToMany(mappedBy="organization", cascade={CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval=true)
 	@OrderBy("priority ASC")
 	private List<OrganizationRole> organizationRoles = Lists.newArrayList();
@@ -135,22 +132,6 @@ public class Organization extends IdEntity {
 		this.children = children;
 	}
 
-	/**  
-	 * 返回 users 的值   
-	 * @return users  
-	 */
-	public List<User> getUsers() {
-		return users;
-	}
-
-	/**  
-	 * 设置 users 的值  
-	 * @param users
-	 */
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-	
 	public List<OrganizationRole> getOrganizationRoles() {
 		return organizationRoles;
 	}

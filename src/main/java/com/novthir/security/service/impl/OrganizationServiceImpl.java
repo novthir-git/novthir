@@ -76,7 +76,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 			throw new ServiceException(organization.getName() + "组织下存在子组织，不允许删除。");
 		}
 		
-		if (userDAO.findByOrganizationId(id).size() > 0) {
+		if (userDAO.findByOrgId(id).size() > 0) {
 			throw new ServiceException(organization.getName() + "组织下存在用户，不允许删除。");
 		}
 		

@@ -24,7 +24,7 @@
 	</context:component-scan>
 
 	<!-- Spring Data Jpa配置 , 扫描base-package下所有继承于Repository<T,ID>的接口 -->
-	<jpa:repositories base-package="com.novthir.security.dao" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory" />
+	<jpa:repositories base-package="com.novthir.security.dao"  repository-impl-postfix="Impl" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory" />
 	<!-- Jpa Entity Manager 配置 -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="dataSource">
 		<property name="dataSource" ref="dataSource" />
