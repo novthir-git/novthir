@@ -109,21 +109,21 @@
 											<th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
 											<th>Username</th>
 											<th class="hidden-480">Email</th>
-											<th class="hidden-480">Points</th>
-											<th class="hidden-480">Joined</th>
-											<th ></th>
+											<th class="hidden-480">realname</th>
+											<th class="hidden-480">phone</th>
+											<th class="hidden-480">createTime</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="user" items="${users }">
-										<tr class="odd gradeX">
-											<td><input type="checkbox" class="checkboxes" value="1" /></td>
-											<td>${user.username }</td>
-											<td class="hidden-480"><a href="mailto:shuxer@gmail.com">${user.email}</a></td>
-											<td class="hidden-480">120</td>
-											<td class="center hidden-480">12 Jan 2012</td>
-											<td ><span class="label label-success">Approved</span></td>
-										</tr>
+											<tr class="odd gradeX">
+												<td><input type="checkbox" class="checkboxes" value="1" /></td>
+												<td>${user.username }</td>
+												<td class="hidden-480"><a href="mailto:shuxer@gmail.com">${user.email}</a></td>
+												<td class="hidden-480">120</td>
+												<td class="center hidden-480">12 Jan 2012</td>
+												<td ><span class="label label-success">Approved</span></td>
+											</tr>
 										</c:forEach>
 									</tbody>
 								</table>

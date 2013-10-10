@@ -30,6 +30,8 @@ import com.novthir.security.exception.ServiceException;
 import com.novthir.security.service.UserService;
 import com.novthir.security.shiro.ShiroDbRealm;
 import com.novthir.security.shiro.ShiroDbRealm.HashPassword;
+import com.novthir.security.utils.DataTablesReq;
+import com.novthir.security.utils.DataTablesResp;
 import com.novthir.security.utils.Page;
 import com.novthir.security.utils.PageUtils;
 
@@ -163,7 +165,6 @@ public class UserServiceImpl implements UserService {
 	 * @param page
 	 * @param name
 	 * @return  
-	 * @see com.novthir.security.service.UserService#find(com.novthir.security.util.dwz.Page, java.lang.String)  
 	 */
 	public List<User> find(Page page, String name) {
 		org.springframework.data.domain.Page<User> springDataPage = 	userDAO.findByUsernameContaining(name, PageUtils.createPageable(page));
@@ -171,6 +172,18 @@ public class UserServiceImpl implements UserService {
 		return springDataPage.getContent();
 	}
 
+	public List<User> find(DataTablesReq params,DataTablesResp<User> resp){
+		org.springframework.data.domain.Page<User> springDataPage  = null;
+		if(StringUtils.isNotBlank(params.getSSearch())){
+			springDataPage = 	userDAO.findByUsernameContaining(params.getSSearch(), PageUtils.createPageable(params));
+		
+		}else{
+			springDataPage = userDAO.findAll(PageUtils.createPageable(params));
+		}
+		resp.setiTotalDisplayRecords((int) springDataPage.getTotalElements());
+		resp.setiTotalRecords((int) springDataPage.getTotalElements());
+		return springDataPage.getContent();
+	}
 	/**
 	 * 判断是否超级管理员.
 	 */

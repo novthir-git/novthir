@@ -12,12 +12,13 @@
  **/
  
 package com.novthir.security.service;
-
 import java.util.List;
 
 import com.novthir.security.entity.User;
 import com.novthir.security.exception.ExistedException;
 import com.novthir.security.exception.ServiceException;
+import com.novthir.security.utils.DataTablesReq;
+import com.novthir.security.utils.DataTablesResp;
 import com.novthir.security.utils.Page;
 
 /** 
@@ -44,4 +45,6 @@ public interface UserService {
 	void delete(Long id) throws ServiceException;
 
 	List<User> findAll(Page page);
+	
+	public List<User> find(DataTablesReq params,DataTablesResp<User> resp);
 }

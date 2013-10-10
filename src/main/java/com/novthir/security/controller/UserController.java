@@ -36,6 +36,8 @@ import com.novthir.security.service.RoleService;
 import com.novthir.security.service.UserRoleService;
 import com.novthir.security.service.UserService;
 import com.novthir.security.utils.AjaxObject;
+import com.novthir.security.utils.DataTablesReq;
+import com.novthir.security.utils.DataTablesResp;
 import com.novthir.security.utils.Page;
 
 @Controller
@@ -157,40 +159,23 @@ public class UserController {
 					.toString();
 		}
 
-		LogUitl.putArgs(LogMessageObject.newWrite().setObjects(
-				new Object[] { Arrays.toString(usernames) }));
+		LogUitl.putArgs(LogMessageObject.newWrite().setObjects(new Object[] { Arrays.toString(usernames) }));
 		return AjaxObject.newOk("删除用户成功！").setCallbackType("").toString();
-	}
-
-	@RequestMapping(value = "/test")
-	public @ResponseBody
-	User test() {
-		User u = new User();
-		u.setRealname("sdffd");
-		u.setEmail("novthir@gmail.com");
-		return u;
 	}
 
 	@RequiresPermissions("User:view")
 	@RequestMapping(value = "/list", method = { RequestMethod.GET,RequestMethod.POST })
-	public @ResponseBody	Map<String, Object> list(Page page, String keywords) {
-		Map<String,Object> map = Maps.newHashMap();
-		List<User> users = null;
-		if (StringUtils.isNotBlank(keywords)) {
-			users = userService.find(page, keywords);
-		} else {
-			users = userService.findAll(page);
-		}
-		if(users != null){
-			for(User user:users){
+	public @ResponseBody	DataTablesResp<User> list(DataTablesReq params,DataTablesResp<User> resp) {
+		List<User> users = userService.find(params, resp);
+		if (users != null) {
+			for (User user : users) {
 				user.setPassword("");
 				user.setSalt("");
 			}
 		}
-		map.put("page", page);
-		map.put("aaData", users);
-		map.put("keywords", keywords);
-		return map;
+		resp.setsEcho(params.getSEcho());
+		resp.setAaData(users);
+		return resp;
 	}
 
 	@RequiresPermissions("User:view")

@@ -33,31 +33,23 @@ public class PageUtils {
 	 * @param page
 	 * @return
 	 */
-	public static Pageable createPageable(Page page) {
-		if (StringUtils.isNotBlank(page.getOrderField())) {
+	public static Pageable createPageable(DataTablesReq req) {
+		int page = 0 ,  size = DataTablesReq.DEFAULT_PAGE_SIZE;
+		if(req != null){
+			page = req.getIDisplayStart() / req.getIDisplayLength();
+			size = req.getIDisplayLength();
+		}
+		if (StringUtils.isNotBlank(req.getSSortDir_0())) {
 			// 忽略大小写
-			if (page.getOrderDirection().equalsIgnoreCase(Page.ORDER_DIRECTION_ASC)) {
-				return new PageRequest(page.getPlainPageNum() - 1, page.getNumPerPage(), 
-						Sort.Direction.ASC, page.getOrderField());
+			if (req.getSSortDir_0().equalsIgnoreCase(DataTablesReq.ORDER_DIRECTION_ASC)) {
+				return new PageRequest(page ,size, Sort.Direction.ASC, "username");
 			} else {
-				return new PageRequest(page.getPlainPageNum() - 1, page.getNumPerPage(), 
-						Sort.Direction.DESC, page.getOrderField());
+				return new PageRequest(page,size, 	Sort.Direction.DESC, "username");
 			}
 		}
 
-		return new PageRequest(page.getPlainPageNum() - 1, page.getNumPerPage());
+		return new PageRequest(page,size);
 	}
 
-	/**
-	 * 将springDataPage的属性注入page描述
-	 * 
-	 * @param page
-	 * @param springDataPage
-	 */
-	@Deprecated
-	public static void injectPageProperties(Page page,
-			org.springframework.data.domain.Page<?> springDataPage) {
-		// 暂时只注入总记录数量
-		page.setTotalCount(springDataPage.getTotalElements());
-	}
+	
 }
